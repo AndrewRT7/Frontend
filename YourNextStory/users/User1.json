@@ -1,0 +1,20 @@
+{
+  "username": "User1",
+  "password": "$2b$10$hNq84ZxmI2CBRZ8wgT2YFu1U2xUfLiecjyWocFNqJhHlmrs00.EXC",
+  "preferredTags": [
+    "rpg",
+    "turn-based",
+    "strategy",
+    "western",
+    "sci-fi",
+    "sci-fi"
+  ],
+  "preferredTypes": [
+    "movie",
+    "game",
+    "series"
+  ],
+  "favorites": [
+    "god-of-war-2018"
+  ]
+}
