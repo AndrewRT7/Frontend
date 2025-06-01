@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YourNextStory – Project Details</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>YourNextStory</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Main</a></li>
+          <li><a href="recommendation.html">Recommendations</a></li>
+          <li><a href="search.html">Search</a></li>
+          <li><a href="profile.html">Profile</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div id="root"></div>
+    </main>
+
+    <script type="text/babel">
+      const { useEffect, useState } = React;
+      function ProjectDetail() {
+        const params = new URLSearchParams(window.location.search);
+        const projectId = params.get("id");
+        const [project, setProject] = useState(null);
+        const [comments, setComments] = useState([]);
+        const [page, setPage] = useState(1);
+        const [commentText, setCommentText] = useState("");
+        const [isLoading, setIsLoading] = useState(true);
+        const [isLoggedIn, setIsLoggedIn] = useState(false);
+        const [addStatus, setAddStatus] = useState("");
+        const [libraryAdded, setLibraryAdded] = useState(false);
+        const commentsPerPage = 5;
+
+        useEffect(() => {
+          if (!projectId) return;
+          fetch("projects.json")
+          .then((res) => res.json())
+          .then((data) => {
+            const found = data.projects.find((p) => p.id === projectId);
+            setProject(found || null);
+            setIsLoading(false);
+          })
+          .catch((err) => {
+            console.error(err);
+            setIsLoading(false);
+          });
+        }, [projectId]);
+
+        useEffect(() => {
+          if (!projectId) return;
+          fetch(`/api/comments/${projectId}?page=${page}&perPage=${commentsPerPage}`)
+          .then((res) => res.json())
+          .then((data) => setComments(data))
+          .catch(() => setComments([]));
+        }, [page, projectId]);
+        useEffect(() => {
+          fetch("/api/current-user")
+          .then((res) => {
+            if (res.ok) {
+              setIsLoggedIn(true);
+            } else {
+              setIsLoggedIn(false);
+            }
+          })
+            .catch(() => setIsLoggedIn(false));
+        }, []);
+
+        const handleSubmit = (e) => {
+          e.preventDefault();
+          const text = commentText.trim();
+          if (!text) return;
+          fetch(`/api/comments/${projectId}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text })
+          })
+          .then(() => {
+            setCommentText("");
+            setPage(1);
+          });
+        };
+
+        const renderDuration = (duration) => {
+          if (duration.total)
+            return `${duration.total} ${duration.unit}`;
+          if (duration.range)
+            return `${duration.range[0]} - ${duration.range[1]} ${duration.unit}`;
+          if (duration.per_episode)
+            return `${duration.per_episode} per episode, ${duration.episodes} episodes`;
+          return "N/A";
+        };
+
+        const handleAddToLibrary = async () => {
+          try {
+            const response = await fetch("/api/user/library", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ projectId }),
+            });
+            const data = await response.json();
+            if (response.ok) {
+              setAddStatus(data.message);
+              setLibraryAdded(true);
+            } else {
+              setAddStatus(data.error || "Failed to add project.");
+            }
+          } catch (error) {
+            console.error("Error adding project to library:", error);
+            setAddStatus("An error occurred.");
+          }
+        };
+
+        if (!projectId) return <p>No project selected.</p>;
+        if (isLoading) return <p>Loading project details...</p>;
+        if (!project) return <p>Project not found.</p>;
+
+        return (
+          <section id="project-detail">
+            <div className="project-container">
+              <div className="project-image">
+                <img src={project.poster} alt={`${project.title} Poster`} />
+              </div>
+              <div className="project-info">
+                <h2>{project.title}</h2>
+                {project.metadata && (
+                  <div className="project-metadata">
+                    <h3>Details</h3>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td><strong>Type:</strong></td>
+                          <td>{project.metadata.type}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Genre:</strong></td>
+                          <td>
+                            {Array.isArray(project.metadata.genre)
+                              ? project.metadata.genre.join(", ")
+                              : project.metadata.genre}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><strong>Platform:</strong></td>
+                          <td>
+                            {Array.isArray(project.metadata.platform)
+                              ? project.metadata.platform.join(", ")
+                              : project.metadata.platform}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><strong>Theme:</strong></td>
+                          <td>
+                            {Array.isArray(project.metadata.theme)
+                              ? project.metadata.theme.join(", ") : project.metadata.theme}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><strong>Duration:</strong></td>
+                          <td>{renderDuration(project.metadata.duration)}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+                {isLoggedIn && (
+                  <div className="add-to-library">
+                    <button onClick={handleAddToLibrary} disabled={libraryAdded}>
+                      {libraryAdded ? "Added to Library" : "Add to Library"}
+                    </button>
+                    {addStatus && <p>{addStatus}</p>}
+                  </div>
+                )}
+                <section id="project-comments">
+                  <h3>Comments</h3>
+                  <div id="comments-container">
+                    {comments.length === 0 ? (
+                      <p>No comments on this page</p>
+                    ) : (
+                      comments.map((c, i) => <p key={i}>{c}</p>)
+                    )}
+                  </div>
+                  <form id="comment-form" onSubmit={handleSubmit}>
+                    <div className="comment-input-container">
+                      <textarea
+                        value={commentText}
+                        onChange={(e) => setCommentText(e.target.value)}
+                        placeholder="Write a comment..."
+                        required>
+                      </textarea>
+                      <button type="submit" className="btn">
+                        Post
+                      </button>
+                    </div>
+                  </form>
+                  <div id="comment-pagination">
+                    <button
+                      className="btn"
+                      disabled={page <= 1}
+                      onClick={() => setPage(page - 1)}>Previous
+                    </button>
+                    <span>Page {page}</span>
+                    <button
+                      className="btn"
+                      onClick={() => setPage(page + 1)}>Next
+                    </button>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </section>
+        );
+      }
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<ProjectDetail />);
+    </script>
+  </body>
+</html>

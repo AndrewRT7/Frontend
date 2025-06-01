@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YourNextStory – User Profile</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>YourNextStory</h1>
+      <nav>
+      <ul>
+        <li><a href="index.html">Main</a></li>
+        <li><a href="recommendation.html">Recommendations</a></li>
+        <li><a href="search.html">Search</a></li>
+        <li><a class="active" href="profile.html">Profile</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="login-section">
+      <h2>Login</h2>
+      <form id="loginForm" action="#" novalidate>
+        <label for="username">Username:</label><br />
+        <input type="text" id="username" name="username" placeholder="Enter your username" /><br />
+        <small id="usernameError" style="color: red; display: none;"></small><br />
+        
+        <label for="password">Password:</label><br />
+        <div class="password-container">
+          <input type="password" id="password" name="password" placeholder="Enter your password" />
+          <button type="button" id="togglePassword" class="toggle-password" aria-label="Toggle password visibility">Show</button>
+        </div>
+        <small id="passwordError" style="color: red; display: none;"></small><br />
+
+        <button type="submit" id="loginBtn">Login</button>
+      </form>
+      <div id="message" style="margin-top: 1em;"></div>
+    </section>
+
+    <section id="library-section" style="display: none;">
+      <div class="profile-tabs">
+        <div class="profile-nav">
+          <button class="tab active" data-tab="preferences">Preferences</button>
+          <button class="tab" data-tab="library">Library</button>
+        </div>
+
+        <section id="preferences" class="tab-content active">
+          <form id="tag-form">
+            <fieldset>
+              <legend>Types</legend>
+              <ul class="checkbox-group">
+                <li>
+                  <label>
+                    <input type="checkbox" name="type" value="movie" /> Movie
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="type" value="game" /> Game
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="type" value="series" /> Series
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+
+            <fieldset>
+              <legend>Genres</legend>
+              <ul class="checkbox-group">
+                <li>
+                  <label>
+                    <input type="checkbox" name="genre" value="action" /> Action
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="genre" value="rpg" /> RPG
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="genre" value="comedy" /> Comedy
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="genre" value="horror" /> Horror
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="genre" value="turn-based" /> Turn-based
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="genre" value="strategy" /> Strategy
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="genre" value="western" /> Western
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="genre" value="mystery" /> Mystery
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="genre" value="shooter" /> Shooter
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="genre" value="adventure" /> Adventure
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="genre" value="drama" /> Drama
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="genre" value="thriller" /> Thriller
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="genre" value="sci-fi" /> Sci-Fi
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+
+            <fieldset>
+              <legend>Platforms</legend>
+              <ul class="checkbox-group">
+                <li>
+                  <label>
+                    <input type="checkbox" name="platform" value="Netflix" /> Netflix
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="platform" value="Prime Video" /> Prime Video
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="platform" value="Apple TV" /> Apple TV
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="platform" value="HBO Max" /> HBO Max
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="platform" value="Disney+" /> Disney+
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="platform" value="PC" /> PC
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="platform" value="PS4" /> PS4
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="platform" value="PS5" /> PS5
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="platform" value="Xbox One" /> Xbox One
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="platform" value="Xbox Series" /> Xbox Series
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="platform" value="Mobile" /> Mobile
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+
+            <fieldset>
+              <legend>Themes</legend>
+              <ul class="checkbox-group">
+                <li>
+                  <label>
+                    <input type="checkbox" name="theme" value="superhero" /> Superhero
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="theme" value="dark" /> Dark
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="theme" value="fantasy" /> Fantasy
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="theme" value="mythology" /> Mythology
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="theme" value="sci-fi" /> Sci-Fi
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="theme" value="apocalypse" /> Apocalypse
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="theme" value="crime" /> Crime
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="theme" value="family" /> Family
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="theme" value="war" /> War
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="theme" value="political" /> Political
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="theme" value="openworld" /> Openworld
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="theme" value="violence" /> Violence
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="theme" value="outlaws" /> Outlaws
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="theme" value="indie" /> Indie
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="theme" value="cards" /> Cards
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="theme" value="vampires" /> Vampires
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+            <button type="submit">Save Preferences</button>
+          </form>
+        </section>
+
+        <section id="library" class="tab-content">
+          <h2>Your Library</h2>
+          <div class="library-items" id="library-items">
+            <p>Loading favorite projects...</p>
+          </div>
+          <div id="latest-history">
+          <h3>Latest Additions</h3>
+            <ol id="latest-list"></ol>
+          </div>
+        </section>
+      </div>
+
+      <button id="logoutBtn" style="margin-top: 1em;">Log out</button>
+    </section>
+  </main>
+
+  <script src="profile.js"></script>
+</body>
+</html>

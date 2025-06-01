@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YourNextStory - Recommendations</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header>
+    <h1>YourNextStory</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Main</a></li>
+        <li><a class="active" href="recommendation.html">Recommendations</a></li>
+        <li><a href="search.html">Search</a></li>
+        <li><a href="profile.html">Profile</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="recommendation-layout" id="recommendation-interface">
+      <aside class="sidebar" id="filter-sidebar">
+        <h2>Filter</h2>
+        <label for="type-filter">Type:</label>
+        <select id="type-filter">
+          <option value="all">All Types</option>
+          <option value="Movie">Movies</option>
+          <option value="Game">Games</option>
+          <option value="Series">Series</option>
+        </select>
+
+        <label for="platform-filter">Platform:</label>
+        <select id="platform-filter">
+          <option value="all">All Platforms</option>
+          <option value="Netflix">Netflix</option>
+          <option value="Prime Video">Prime Video</option>
+          <option value="Apple TV">Apple TV</option>
+          <option value="HBO Max">HBO Max</option>
+          <option value="Disney+">Disney+</option>
+          <option value="PC">PC</option>
+          <option value="PS4">PS4</option>
+          <option value="PS5">PS5</option>
+          <option value="Xbox One">Xbox One</option>
+          <option value="Xbox Series">Xbox Series</option>
+          <option value="Mobile">Mobile</option>
+        </select>
+
+        <button id="filter-btn">Apply Filter</button>
+      </aside>
+
+      <section class="main-content">
+        <div class="sort-bar" id="sort-bar">
+          <label for="sort-mode">Sort by:</label>
+          <select id="sort-mode">
+            <option value="title">Title</option>
+            <option value="duration">Duration</option>
+          </select>
+          <button id="sort-btn">Sort</button>
+        </div>
+      <section id="recommendations-container"></section>
+    </section>
+    </div>
+
+    <div id="guest-recommendation" style="display: none;">
+      <h2>Random Recommendation</h2>
+      <div id="random-card"></div>
+    </div>
+  </main>
+
+  <script src="recommendation.js"></script>
+</body>
+</html>

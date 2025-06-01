@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YourNextStory</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body class="dark-theme">
+    <div id="root"></div>
+    <script type="text/babel">
+      const { useEffect, useState, useRef } = React;
+
+      function Main() {
+        const [projects, setProjects] = useState([]);
+        const [loading, setLoading] = useState(true);
+        const [error, setError] = useState(null);
+        const fadeRef = useRef(null);
+
+        useEffect(() => {
+          fetch("/api/projects")
+          .then((res) => {
+            if (!res.ok) throw new Error("Network response was not ok");
+            return res.json();
+          })
+          .then((data) => {
+            setProjects(data.projects || data);
+            setLoading(false);
+          })
+          .catch((err) => {
+            console.error("Error fetching projects:", err);
+            setError("Failed to load projects. Please try again later.");
+            setLoading(false);
+          });
+        }, []);
+
+        useEffect(() => {
+          const hour = new Date().getHours();
+          document.body.classList.toggle("dark-theme", hour >= 20 || hour < 6);
+        }, []);
+
+        useEffect(() => {
+          if (!fadeRef.current) return;
+          const observer = new IntersectionObserver(
+            (entries, obs) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("visible");
+                  obs.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.5 }
+          );
+          
+          observer.observe(fadeRef.current);
+          return () => observer.disconnect();
+        }, [projects]);
+
+        function formatDuration(duration) {
+          if (!duration) return "Unknown";
+          if (duration.total) {
+            return `${duration.total} ${duration.unit}`;
+          } else if (duration.range) {
+            return `${duration.range[0]}–${duration.range[1]} ${duration.unit}`;
+          } else if (duration.per_episode && duration.episodes) {
+            return `${duration.episodes} episodes × ${duration.per_episode} ${duration.unit}`;
+          } else {
+            return "Unknown";
+          }
+        }
+
+        const trending = projects.filter((p) => p.tags?.includes("popular"));
+
+        return (
+          <>
+            <header>
+              <h1>YourNextStory</h1>
+              <nav>
+                <ul>
+                  <li><a className="active" href="main.html">Main</a></li>
+                  <li><a href="recommendation.html">Recommendations</a></li>
+                  <li><a href="search.html">Search</a></li>
+                  <li><a href="profile.html">Profile</a></li>
+                </ul>
+              </nav>
+            </header>
+
+            <main>
+              {loading && <p>Loading projects...</p>}
+              {error && <p className="error">{error}</p>}
+              {!loading && !error && (
+                <>
+                  <section>
+                    <h2>Featured Projects</h2>
+                    <div className="scroll-container">
+                      {projects.map((p, i) => (
+                        <figure key={p.id || i} className="poster-card">
+                          <a href={p.link}>
+                            <img
+                              src={p.poster}
+                              alt={`${p.title} Poster`}
+                              className="poster"
+                            />
+                          </a>
+                          <figcaption>
+                            <a href={p.link}>{p.title}</a>
+                          </figcaption>
+                        </figure>
+                      ))}
+                    </div>
+                  </section>
+
+                  <section className="trending-section">
+                    <h2>Trending Media</h2>
+                    <div className="fade-in-section" ref={fadeRef}>
+                      <div className="trending-container">
+                        {trending.map((p, i) => (
+                          <figure key={p.id || i} className="trending-figure">
+                            <a href={p.link}>
+                              <img
+                                src={p.poster}
+                                alt={`${p.title} Poster`}
+                                className="trending-poster"
+                              />
+                            </a>
+                            <figcaption>
+                              <h3>{p.title}</h3>
+                              <p><strong>Type:</strong> {p.metadata?.type || "Unknown"}</p>
+                              <p><strong>Genre:</strong> {Array.isArray(p.metadata?.genre) ? p.metadata.genre.join(", ") : p.metadata?.genre || "Unknown"}</p>
+                              <p><strong>Platform:</strong> {Array.isArray(p.metadata?.platform) ? p.metadata.platform.join(", ") : p.metadata?.platform || "Unknown"}</p>
+                              <p><strong>Theme:</strong> {Array.isArray(p.metadata?.theme) ? p.metadata.theme.join(", ") : p.metadata?.theme || "Unknown"}</p>
+                              <p><strong>Duration:</strong> {formatDuration(p.metadata?.duration)}</p>
+                            </figcaption>
+                          </figure>
+                        ))}
+                      </div>
+                    </div>
+                  </section>
+                </>
+              )}
+            </main>
+          </>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<Main />);
+    </script>
+  </body>
+</html>

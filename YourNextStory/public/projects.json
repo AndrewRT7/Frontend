@@ -1,0 +1,174 @@
+{
+  "projects": [
+    {
+      "id": "batman-v-superman",
+      "title": "Batman v Superman: Dawn of Justice",
+      "link": "project.html?id=batman-v-superman",
+      "poster": "https://www.themoviedb.org/t/p/w1280/7kz2Qe1FwYG8LwZejZP7VHW6bUc.jpg",
+      "metadata": {
+        "type": "Movie",
+        "genre": ["action", "thriller"],
+        "platform": ["HBO Max", "Prime Video", "Netflix"],
+        "theme": ["superhero", "dark"],
+        "duration": {
+          "total": 182,
+          "unit": "minutes"}
+      }
+    },
+    {
+      "id": "god-of-war-2018",
+      "title": "God of War (2018)",
+      "link": "project.html?id=god-of-war-2018",
+      "poster": "https://cdn.thegamesdb.net/images/original/boxart/front/96733-1.jpg",
+      "metadata": {
+        "type": "Game",
+        "genre": ["action", "rpg"],
+        "platform": ["PS4", "PS5", "PC"],
+        "theme": ["fantasy", "mythology"],
+        "duration": {
+          "range": [20, 40],
+          "unit": "hours"}
+      }
+    },
+    {
+      "id": "final-fantasy-8",
+      "title": "Final Fantasy VIII",
+      "link": "project.html?id=final-fantasy-8",
+      "poster": "https://www.teahub.io/photos/full/183-1836353_final-fantasy-viii-poster.jpg",
+      "metadata": {
+        "type": "Game",
+        "genre": ["adventure", "rpg"],
+        "platform": ["PS4", "PS5", "Xbox One", "Xbox Series", "PC"],
+        "theme": ["fantasy", "sci-fi"],
+        "duration": {
+          "range": [30, 60],
+          "unit": "hours"}
+      }
+    },
+    {
+      "id": "fallout",
+      "title": "Fallout",
+      "link": "project.html?id=fallout",
+      "poster": "https://www.themoviedb.org/t/p/w1280/AnsSKR9LuK0T9bAOcPVA3PUvyWj.jpg",
+      "metadata": {
+        "type": "Series",
+        "genre": ["adventure", "comedy"],
+        "platform": "Prime Video",
+        "theme": "apocalypse",
+        "duration": {
+          "per_episode": 60,
+          "episodes": 8,
+          "unit": "minutes_per_episode"}
+      }
+    },
+    {
+      "id": "breaking-bad",
+      "title": "Breaking Bad",
+      "link": "project.html?id=breaking-bad",
+      "poster": "https://www.themoviedb.org/t/p/w1280/anFx9aTOOYqgS3v7x3R84Kz67ly.jpg",
+      "metadata": {
+        "type": "Series",
+        "genre": ["drama", "thriller"],
+        "platform": "Netflix",
+        "theme": "crime",
+        "duration": {
+          "per_episode": 50,
+          "episodes": 62,
+          "unit": "minutes_per_episode"}
+      }
+    },
+    {
+      "id": "bee-movie",
+      "title": "Bee Movie",
+      "link": "project.html?id=bee-movie",
+      "poster": "https://www.themoviedb.org/t/p/w1280/rYBaXgvTKFS8iZC7Wr8SMomSauQ.jpg",
+      "metadata": {
+        "type": "Movie",
+        "genre": ["comedy", "adventure"],
+        "platform": ["Netflix", "Apple TV"],
+        "theme": "family",
+        "duration": {
+          "total": 91,
+          "unit": "minutes"}
+      }
+    },
+    {
+      "id": "andor",
+      "title": "Andor",
+      "link": "project.html?id=andor",
+      "poster": "https://www.themoviedb.org/t/p/w1280/qLlDIimACNAvyz84RwxgySNQ0uT.jpg",
+      "metadata": {
+        "type": "Series",
+        "genre": ["drama", "thriller", "sci-fi"],
+        "platform": "Disney+",
+        "theme": ["war", "political"],
+        "duration": {
+          "per_episode": 50,
+          "episodes": 24,
+          "unit": "minutes_per_episode"}
+      },
+      "tags": ["popular"]
+    },
+    {
+      "id": "gta-5",
+      "title": "GTA V",
+      "link": "project.html?id=gta-5",
+      "poster": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2lbd.webp",
+      "metadata": {
+        "type": "Game",
+        "genre": ["shooter", "adventure"],
+        "platform": ["PS4", "PS5", "Xbox One", "Xbox Series", "PC"],
+        "theme": ["crime", "openworld"],
+        "duration": {
+          "range": [30, 50],
+          "unit": "hours"}
+      }
+    },
+    {
+      "id": "the-hateful-eight",
+      "title": "The Hateful Eight",
+      "link": "project.html?id=the-hateful-eight",
+      "poster": "https://www.themoviedb.org/t/p/w1280/pYNQfus1A0ruHe3OBzyBqFlBmY5.jpg",
+      "metadata": {
+        "type": "Movie",
+        "genre": ["western", "mystery"],
+        "platform": ["Netflix", "Apple TV"],
+        "theme": ["violence", "outlaws"],
+        "duration": {
+          "total": 188,
+          "unit": "minutes"}
+      }
+    },
+    {
+      "id": "balatro",
+      "title": "Balatro",
+      "link": "project.html?id=balatro",
+      "poster": "https://images.igdb.com/igdb/image/upload/t_cover_big/co9f4g.webp",
+      "metadata": {
+        "type": "Game",
+        "genre": ["turn-based", "strategy"],
+        "platform": ["PS4", "PS5", "Xbox One", "Xbox Series", "PC", "Mobile"],
+        "theme": ["indie", "cards"],
+        "duration": {
+          "range": [7, 40],
+          "unit": "hours"}
+      }
+    },
+    {
+      "id": "sinners",
+      "title": "Sinners",
+      "link": "project.html?id=sinners",
+      "poster": "https://www.themoviedb.org/t/p/w1280/jYfMTSiFFK7ffbY2lay4zyvTkEk.jpg",
+      "metadata": {
+        "type": "Movie",
+        "genre": ["horror", "action"],
+        "platform": "Movie Theaters",
+        "theme": ["violence", "vampires"],
+        "duration": {
+          "total": 78,
+          "unit": "minutes"}
+      },
+      "tags": ["popular"]
+    }
+  ]
+}
